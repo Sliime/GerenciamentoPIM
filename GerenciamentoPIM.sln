@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.852
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciamentoPIM", "GerenciamentoPIM\GerenciamentoPIM.csproj", "{3CA9A861-F1CD-4B6F-92D1-49AD6C5DE11E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CA9A861-F1CD-4B6F-92D1-49AD6C5DE11E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CA9A861-F1CD-4B6F-92D1-49AD6C5DE11E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CA9A861-F1CD-4B6F-92D1-49AD6C5DE11E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CA9A861-F1CD-4B6F-92D1-49AD6C5DE11E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {28A9E1D6-76BA-44C2-BFA0-20611C105E0F}
+	EndGlobalSection
+EndGlobal
