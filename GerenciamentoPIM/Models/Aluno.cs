@@ -70,8 +70,10 @@ namespace GerenciamentoPIM.Models
 
         }
 
-        public static void Consultar()
+        public List<Aluno> Consultar()
         {
+            List<Aluno> _alunos = new List<Aluno>();
+
             try
             {
                 string conexaoAccess = ConfigurationManager.ConnectionStrings["conexaoAccess"].ToString();
@@ -81,23 +83,29 @@ namespace GerenciamentoPIM.Models
                 conexaoDb.Open();
 
                 
-                string query = "SELECT aluno FROM PIM_TABELA";
+                string query = "SELECT * FROM PIM_TABELA";
 
                 OleDbCommand cmd = new OleDbCommand(query, conexaoDb);
                 OleDbDataReader getLista = cmd.ExecuteReader();
 
-
+                
                 while (getLista.Read())
                 {
-                    var teste =getLista[0].ToString();
+
+                    _alunos.Add(new Aluno() {
+                         codigo = Convert.ToInt32(getLista[0]),
+                         Nome = getLista[1].ToString(),
+                         Disciplina = getLista[2].ToString()
+                     });
                 }
                 getLista.Close();
 
-
+                return _alunos;
             }
             catch (Exception ex)
             {
-               
+                throw ex;
+                
 
             }
 

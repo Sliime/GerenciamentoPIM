@@ -27,7 +27,7 @@ namespace GerenciamentoPIM.Controllers
         // GET: Aluno/Details/5
         public ActionResult Details()
         {
-           Aluno.Consultar();
+           imus.Consultar();
 
             return View();
         }
