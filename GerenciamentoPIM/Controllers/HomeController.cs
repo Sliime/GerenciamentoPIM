@@ -9,9 +9,12 @@ namespace GerenciamentoPIM.Controllers
 {
     public class HomeController : Controller
     {
+        public Aluno imus = new Aluno();
+
         public ActionResult Index()
         {
-            return View();
+           var lista = imus.Consultar();
+            return View(lista);
         }
 
        

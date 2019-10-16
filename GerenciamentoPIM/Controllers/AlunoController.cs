@@ -25,11 +25,11 @@ namespace GerenciamentoPIM.Controllers
         }
 
         // GET: Aluno/Details/5
-        public ActionResult Details()
+        public JsonResult Details()
         {
-           imus.Consultar();
+           var lista = imus.Consultar();
 
-            return View();
+            return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Aluno/Create
