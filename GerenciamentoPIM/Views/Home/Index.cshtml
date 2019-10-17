@@ -4,23 +4,38 @@
 
 <h2 class="text-center">Gerenciador de Tarefas UNIPIM</h2>
 
-<table>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Disciplina)
-            </td>
-        </tr>
+<div class="container center-block">
+    <h3 class="h3">Tarefas que você possui no momento: </h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Disciplina</th>
+                <th scope="col">Aluno</th>
 
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-        </tr>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tbody>
+                <tr>
+                    <th scope="row">10/04/2019</th>
+                    <td>
+                        Disciplina: @Html.DisplayFor(modelItem => item.Disciplina)
+                    </td>
 
-    }
-</table>
+                    <td>
+                        Aluno:   @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                </tr>
+
+            </tbody>
+
+
+        }
+    </table>
+
+</div>
 
 
 
