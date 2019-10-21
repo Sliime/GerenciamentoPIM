@@ -111,5 +111,57 @@ namespace GerenciamentoPIM.Models
 
         }
 
+        public void Deletar(Aluno aluno)
+        {
+            try
+            {
+                string conexaoAccess = ConfigurationManager.ConnectionStrings["conexaoAccess"].ToString();
+
+                OleDbConnection conexaoDb = new OleDbConnection(conexaoAccess);
+
+                conexaoDb.Open();
+
+                string query = "DELETE FROM PIM_TABELA WHERE (aluno) = (@Nome)";
+
+                OleDbCommand cmd = new OleDbCommand(query, conexaoDb);
+
+                var parametroDisciplina = cmd.CreateParameter();
+                parametroDisciplina.ParameterName = "@Disciplina";
+                parametroDisciplina.DbType = DbType.String;
+                parametroDisciplina.Value = aluno.Disciplina;
+                cmd.Parameters.Add(parametroDisciplina);
+
+                var parametroNome = cmd.CreateParameter();
+                parametroNome.ParameterName = "@Nome";
+                parametroNome.DbType = DbType.String;
+                parametroNome.Value = aluno.Nome;
+                cmd.Parameters.Add(parametroNome);
+
+
+
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+
+                    conexaoDb.Close();
+                   
+                }
+
+                else
+                {
+                    conexaoDb.Close();
+                    
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+               
+
+            }
+
+        }
+
     }
 }

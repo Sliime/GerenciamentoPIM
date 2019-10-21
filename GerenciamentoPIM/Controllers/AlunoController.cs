@@ -16,9 +16,9 @@ namespace GerenciamentoPIM.Controllers
         public ActionResult Index()
         {
             
-            imus.Disciplina = "testandoqqqqqqqqqqqqqqqqqqqss";
-            imus.Nome = "imus";
-            imus.Cadastrar(imus);
+            //imus.Disciplina = "testandoqqqqqqqqqqqqqqqqqqqss";
+            //imus.Nome = "imus";
+            //imus.Cadastrar(imus);
 
 
             return View();
@@ -40,18 +40,16 @@ namespace GerenciamentoPIM.Controllers
 
         // POST: Aluno/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Aluno aluno)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                imus.Cadastrar(aluno);
 
-                return RedirectToAction("Index");
+                return Index();
             }
-            catch
-            {
-                return View();
-            }
+
+            return View();
         }
 
         // GET: Aluno/Edit/5
@@ -77,8 +75,11 @@ namespace GerenciamentoPIM.Controllers
         }
 
         // GET: Aluno/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete()
         {
+            imus.Disciplina = "testandoqqqqqqqqqqqqqqqqqqqss";
+            imus.Nome = "imus";
+            imus.Deletar(imus);
             return View();
         }
 
