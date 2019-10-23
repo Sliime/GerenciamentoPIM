@@ -32,17 +32,20 @@ namespace GerenciamentoPIM.Models
 
                 OleDbCommand cmd = new OleDbCommand(query, conexaoDb);
 
-                var parametroDisciplina = cmd.CreateParameter();
-                parametroDisciplina.ParameterName = "@Disciplina";
-                parametroDisciplina.DbType = DbType.String;
-                parametroDisciplina.Value = aluno.Disciplina;
-                cmd.Parameters.Add(parametroDisciplina);
+
 
                 var parametroNome = cmd.CreateParameter();
                 parametroNome.ParameterName = "@Nome";
                 parametroNome.DbType = DbType.String;
                 parametroNome.Value = aluno.Nome;
                 cmd.Parameters.Add(parametroNome);
+
+                var parametroDisciplina = cmd.CreateParameter();
+                parametroDisciplina.ParameterName = "@Disciplina";
+                parametroDisciplina.DbType = DbType.String;
+                parametroDisciplina.Value = aluno.Disciplina;
+                cmd.Parameters.Add(parametroDisciplina);
+
 
 
 
@@ -96,7 +99,8 @@ namespace GerenciamentoPIM.Models
                          codigo = Convert.ToInt32(getLista[0]),
                          Nome = getLista[1].ToString(),
                          Disciplina = getLista[2].ToString()
-                     });
+
+                    });
                 }
                 getLista.Close();
 

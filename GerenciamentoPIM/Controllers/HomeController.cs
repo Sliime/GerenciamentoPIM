@@ -30,5 +30,19 @@ namespace GerenciamentoPIM.Controllers
 
             return View();
         }
+
+        public ActionResult Create(Aluno aluno)
+        {
+            if (ModelState.IsValid)
+            {
+                imus.Cadastrar(aluno);
+
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+
     }
 }

@@ -46,7 +46,7 @@ namespace GerenciamentoPIM.Controllers
             {
                 imus.Cadastrar(aluno);
 
-                return Index();
+                return RedirectToAction("Index");
             }
 
             return View();

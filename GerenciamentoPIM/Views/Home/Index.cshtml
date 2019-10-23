@@ -10,7 +10,7 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Disciplina</th>
+                <th scope="col" onclick="getAluno()">Disciplina</th>
                 <th scope="col">Aluno</th>
 
             </tr>
@@ -20,7 +20,7 @@
             <tbody>
                 <tr>
                     <th scope="row">10/04/2019</th>
-                    <td>
+                    <td id="@item.codigo" onclick="deleteAluno(@item.codigo)">
                         Disciplina: @Html.DisplayFor(modelItem => item.Disciplina)
                     </td>
 
@@ -34,6 +34,15 @@
 
         }
     </table>
+
+    <script>
+    function deleteAluno(id) {
+        console.log("fui clicado e meu id é " + id);
+            $.get('http://localhost:54828/Aluno/Details', function (data) {
+                $('#teste').html(data);
+            })
+        }
+    </script>
 
 </div>
 
