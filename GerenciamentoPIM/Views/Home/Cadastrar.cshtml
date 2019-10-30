@@ -9,32 +9,18 @@
 
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>Aluno</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<form>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Aluno</label>
+        <input type="email" class="form-control" id="Nome" aria-describedby="emailHelp" placeholder="Nome do Aluno">
 
-
-        <div class="form-group">
-            
-            <div class="col-md-10">
-            </div>
-        </div>
-
-        <div class="form-group">
-
-            <div class="col-md-10">
-
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-
-                <a href="#" onclick="SalvarAluno();" class="btn btn-default">Salvar Pedido</a>
-            </div>
-        </div>
     </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Disciplina</label>
+        <input type="text" class="form-control" id="Disciplina" placeholder="Disciplina">
+    </div>
+    <a href="#" onclick="SalvarAluno();" class="btn btn-default">Salvar Pedido</a>
+</form>
 
 
 <div id="divItens" style="display:none;">
@@ -48,7 +34,7 @@
         var Disciplina = $("#Disciplina").val();
         $.ajax({
             type: "POST",
-            url: "http://localhost:54828/Create",
+            url: "http://localhost:54828/Home/Create",
             data: JSON.stringify({ Nome: Nome, Disciplina: Disciplina }),
             contentType: "application/json"
 
@@ -59,9 +45,6 @@
     }
 </script>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
