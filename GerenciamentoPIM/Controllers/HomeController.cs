@@ -9,7 +9,7 @@ namespace GerenciamentoPIM.Controllers
 {
     public class HomeController : Controller
     {
-        public Aluno imus = new Aluno();
+        public Tarefas imus = new Tarefas();
 
         public ActionResult Index()
         {
@@ -18,20 +18,14 @@ namespace GerenciamentoPIM.Controllers
         }
 
        
-        public ActionResult Cadastrar(Aluno aluno)
+        public ActionResult Cadastrar()
         {
 
-            if (ModelState.IsValid)
-            {
-                aluno.Cadastrar(aluno);
-
-                return Index();
-            }
 
             return View();
         }
 
-        public ActionResult Create(Aluno aluno)
+        public ActionResult Create(Tarefas aluno)
         {
             if (ModelState.IsValid)
             {

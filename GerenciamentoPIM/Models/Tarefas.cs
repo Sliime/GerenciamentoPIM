@@ -9,16 +9,16 @@ using System.Data;
 namespace GerenciamentoPIM.Models
 {
 
-    public class Aluno
+    public class Tarefas
     {
         public int codigo { get; set; }
         public string Nome { get; set; }
-        public string Disciplina { get; set; }
+        public string Tarefa { get; set; }
+        public DateTime Data { get; set; }
 
 
 
-
-        public bool Cadastrar(Aluno aluno)
+        public bool Cadastrar(Tarefas aluno)
         {
             try
             {
@@ -28,7 +28,7 @@ namespace GerenciamentoPIM.Models
 
                 conexaoDb.Open();
 
-                string query = "INSERT INTO PIM_TABELA (aluno, disciplina) VALUES (@Nome, @Disciplina)";
+                string query = "INSERT INTO PIM_TABELA (aluno, Tarefa, Data_Entrega) VALUES (@Nome, @Tarefa, Data)";
 
                 OleDbCommand cmd = new OleDbCommand(query, conexaoDb);
 
@@ -40,17 +40,22 @@ namespace GerenciamentoPIM.Models
                 parametroNome.Value = aluno.Nome;
                 cmd.Parameters.Add(parametroNome);
 
-                var parametroDisciplina = cmd.CreateParameter();
-                parametroDisciplina.ParameterName = "@Disciplina";
-                parametroDisciplina.DbType = DbType.String;
-                parametroDisciplina.Value = aluno.Disciplina;
-                cmd.Parameters.Add(parametroDisciplina);
+                var parametroTarefa = cmd.CreateParameter();
+                parametroTarefa.ParameterName = "@Tarefa";
+                parametroTarefa.DbType = DbType.String;
+                parametroTarefa.Value = aluno.Tarefa;
+                cmd.Parameters.Add(parametroTarefa);
+
+                var parametroData = cmd.CreateParameter();
+                parametroData.ParameterName = "@Data";
+                parametroData.DbType = DbType.String;
+                parametroData.Value = aluno.Data;
+                cmd.Parameters.Add(parametroData);
 
 
 
 
-
-                 if (cmd.ExecuteNonQuery() > 0)
+                if (cmd.ExecuteNonQuery() > 0)
                 {
 
                     conexaoDb.Close();
@@ -73,9 +78,9 @@ namespace GerenciamentoPIM.Models
 
         }
 
-        public List<Aluno> Consultar()
+        public List<Tarefas> Consultar()
         {
-            List<Aluno> _alunos = new List<Aluno>();
+            List<Tarefas> _alunos = new List<Tarefas>();
 
             try
             {
@@ -95,10 +100,11 @@ namespace GerenciamentoPIM.Models
                 while (getLista.Read())
                 {
 
-                    _alunos.Add(new Aluno() {
+                    _alunos.Add(new Tarefas() {
                          codigo = Convert.ToInt32(getLista[0]),
                          Nome = getLista[1].ToString(),
-                         Disciplina = getLista[2].ToString()
+                         Tarefa = getLista[2].ToString(),
+                         Data = Convert.ToDateTime(getLista[3])
 
                     });
                 }
@@ -115,7 +121,7 @@ namespace GerenciamentoPIM.Models
 
         }
 
-        public void Deletar(Aluno aluno)
+        public void Deletar(Tarefas aluno)
         {
             try
             {
@@ -132,7 +138,7 @@ namespace GerenciamentoPIM.Models
                 var parametroDisciplina = cmd.CreateParameter();
                 parametroDisciplina.ParameterName = "@Disciplina";
                 parametroDisciplina.DbType = DbType.String;
-                parametroDisciplina.Value = aluno.Disciplina;
+                parametroDisciplina.Value = aluno.Tarefa;
                 cmd.Parameters.Add(parametroDisciplina);
 
                 var parametroNome = cmd.CreateParameter();

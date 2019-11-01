@@ -9,7 +9,7 @@ namespace GerenciamentoPIM.Controllers
 {
     public class AlunoController : Controller
     {
-       public Aluno imus = new Aluno();
+       public Tarefas imus = new Tarefas();
 
 
         // GET: Aluno
@@ -40,7 +40,7 @@ namespace GerenciamentoPIM.Controllers
 
         // POST: Aluno/Create
         [HttpPost]
-        public ActionResult Create(Aluno aluno)
+        public ActionResult Create(Tarefas aluno)
         {
             if (ModelState.IsValid)
             {
@@ -77,7 +77,7 @@ namespace GerenciamentoPIM.Controllers
         // GET: Aluno/Delete/5
         public ActionResult Delete()
         {
-            imus.Disciplina = "testandoqqqqqqqqqqqqqqqqqqqss";
+            imus.Tarefa = "testandoqqqqqqqqqqqqqqqqqqqss";
             imus.Nome = "imus";
             imus.Deletar(imus);
             return View();

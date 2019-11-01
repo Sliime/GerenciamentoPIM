@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GerenciamentoPIM.Models.Aluno>
+﻿@model IEnumerable<GerenciamentoPIM.Models.Tarefas>
 
 
 
@@ -21,7 +21,7 @@
                 <tr>
                     <th scope="row">10/04/2019</th>
                     <td id="@item.codigo" onclick="deleteAluno(@item.codigo)">
-                        Disciplina: @Html.DisplayFor(modelItem => item.Disciplina)
+                        Disciplina: @Html.DisplayFor(modelItem => item.Tarefa)
                     </td>
 
                     <td>

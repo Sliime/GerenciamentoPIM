@@ -17,7 +17,10 @@
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Disciplina</label>
-        <input type="text" class="form-control" id="Disciplina" placeholder="Disciplina">
+        <input type="text" class="form-control" id="Tarefa" placeholder="Disciplina">
+    </div>
+    <div class="form-group">
+        <input type="date" id="Data" />
     </div>
     <a href="#" onclick="SalvarAluno();" class="btn btn-default">Salvar Pedido</a>
 </form>
@@ -31,13 +34,15 @@
 <script>
     function SalvarAluno() {
         var Nome = $("#Nome").val();
-        var Disciplina = $("#Disciplina").val();
+        var Tarefa = $("#Tarefa").val();
+        var Data = $("#Data").val();
+
         $.ajax({
             type: "POST",
             url: "http://localhost:54828/Home/Create",
-            data: JSON.stringify({ Nome: Nome, Disciplina: Disciplina }),
+            data: JSON.stringify({ Nome: Nome, Tarefa: Tarefa, Data: Data }),
             contentType: "application/json"
-
+            
 
         });
 
