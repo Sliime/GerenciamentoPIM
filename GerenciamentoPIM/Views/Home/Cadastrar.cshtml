@@ -11,16 +11,17 @@
     
 <form>
     <div class="form-group">
-        <label for="exampleInputEmail1">Aluno</label>
-        <input type="email" class="form-control" id="Nome" aria-describedby="emailHelp" placeholder="Nome do Aluno">
+        <label for="exampleInputEmail1">Nome da Tarefa</label>
+        <input type="email" class="form-control" id="Nome" aria-describedby="emailHelp" placeholder="Nome da tarefa">
 
     </div>
     <div class="form-group">
-        <label for="exampleInputPassword1">Disciplina</label>
-        <input type="text" class="form-control" id="Tarefa" placeholder="Disciplina">
+        <label for="exampleInputPassword1">Descrição da Tarefa</label>
+        <textarea type="text" class="form-control" id="Tarefa" placeholder="Descrição"> </textarea>
     </div>
     <div class="form-group">
-        <input type="date" id="Data" />
+        <label for="datalimite">Data limite para entrega</label>
+        <input type="date" class="form-control" id="Data" />
     </div>
     <a href="#" onclick="SalvarAluno();" class="btn btn-default">Salvar Pedido</a>
 </form>

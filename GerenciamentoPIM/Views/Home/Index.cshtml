@@ -9,9 +9,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col" onclick="getAluno()">Disciplina</th>
-                <th scope="col">Aluno</th>
+                <th scope="col">Tarefas</th>
+                
+                <th scope="col">Data de Entrega</th>
 
             </tr>
         </thead>
@@ -19,14 +19,18 @@
         {
             <tbody>
                 <tr>
-                    <th scope="row"> Data de vencimento: @Html.DisplayFor(modelItem => item.Data)</th>
-                    <td id="@item.codigo" onclick="deleteAluno(@item.codigo)">
-                        Disciplina: @Html.DisplayFor(modelItem => item.Tarefa)
-                    </td>
+                    <td onclick="deleteAluno(@Html.DisplayFor(modelItem => item.codigo))">
+                        <button type="button" class="btn btn-primary btn-lg btn-block">Tarefa:   @Html.DisplayFor(modelItem => item.Nome)</button>
+                        <div class="container ">
+                            <span id="@Html.DisplayFor(modelItem => item.codigo)" style="display:none">
+                                <p class="container" style="padding: 10px; background-color:   #FFFACD;">@Html.DisplayFor(modelItem => item.Tarefa)</p>
+                            </span>
+                        </div>
 
-                    <td>
-                        Aluno:   @Html.DisplayFor(modelItem => item.Nome)
                     </td>
+                    
+                    <th scope="row"> @Html.DisplayFor(modelItem => item.Data.Day)/@Html.DisplayFor(modelItem => item.Data.Month)/@Html.DisplayFor(modelItem => item.Data.Year)</th>
+
                 </tr>
 
             </tbody>
@@ -37,10 +41,19 @@
 
     <script>
     function deleteAluno(id) {
-        console.log("fui clicado e meu id é " + id);
-            $.get('http://localhost:54828/Aluno/Details', function (data) {
-                $('#teste').html(data);
-            })
+
+        var elToggled = document.getElementById(id);
+
+        if (elToggled.style.display == "none") {
+
+            elToggled.style.display = "block";
+        }
+        else {
+            elToggled.style.display = "none";
+        }
+
+
+
         }
     </script>
 
