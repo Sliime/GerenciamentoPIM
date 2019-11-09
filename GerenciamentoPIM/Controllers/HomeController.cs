@@ -17,7 +17,13 @@ namespace GerenciamentoPIM.Controllers
             return View(lista);
         }
 
-       
+        public ActionResult EditarTarefas()
+        {
+            var lista = imus.Consultar();
+            return View(lista);
+        }
+
+
         public ActionResult Cadastrar()
         {
 
