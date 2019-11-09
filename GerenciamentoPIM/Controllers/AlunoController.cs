@@ -77,9 +77,7 @@ namespace GerenciamentoPIM.Controllers
         // GET: Aluno/Delete/5
         public ActionResult Delete()
         {
-            imus.Tarefa = "testandoqqqqqqqqqqqqqqqqqqqss";
-            imus.Nome = "imus";
-            imus.Deletar(imus);
+
             return View();
         }
 

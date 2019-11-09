@@ -121,7 +121,7 @@ namespace GerenciamentoPIM.Models
 
         }
 
-        public void Deletar(Tarefas aluno)
+        public void Deletar(int id)
         {
             try
             {
@@ -131,21 +131,16 @@ namespace GerenciamentoPIM.Models
 
                 conexaoDb.Open();
 
-                string query = "DELETE FROM PIM_TABELA WHERE (aluno) = (@Nome)";
+                string query = "DELETE FROM PIM_TABELA WHERE (Código) = (@Id)";
 
                 OleDbCommand cmd = new OleDbCommand(query, conexaoDb);
 
-                var parametroDisciplina = cmd.CreateParameter();
-                parametroDisciplina.ParameterName = "@Disciplina";
-                parametroDisciplina.DbType = DbType.String;
-                parametroDisciplina.Value = aluno.Tarefa;
-                cmd.Parameters.Add(parametroDisciplina);
 
-                var parametroNome = cmd.CreateParameter();
-                parametroNome.ParameterName = "@Nome";
-                parametroNome.DbType = DbType.String;
-                parametroNome.Value = aluno.Nome;
-                cmd.Parameters.Add(parametroNome);
+                var parametroId = cmd.CreateParameter();
+                parametroId.ParameterName = "@Id";
+                parametroId.DbType = DbType.String;
+                parametroId.Value = id;
+                cmd.Parameters.Add(parametroId);
 
 
 

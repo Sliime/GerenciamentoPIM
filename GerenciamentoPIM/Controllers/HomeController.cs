@@ -37,6 +37,13 @@ namespace GerenciamentoPIM.Controllers
             return View();
         }
 
+        public ActionResult Delete(int id)
+        {
+
+            imus.Deletar(id);
+            return View();
+        }
+
 
     }
 }

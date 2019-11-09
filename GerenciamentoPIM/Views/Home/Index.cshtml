@@ -10,7 +10,7 @@
         <thead>
             <tr>
                 <th scope="col">Tarefas</th>
-                
+
                 <th scope="col">Data de Entrega</th>
 
             </tr>
@@ -19,7 +19,7 @@
         {
             <tbody>
                 <tr>
-                    <td onclick="deleteAluno(@Html.DisplayFor(modelItem => item.codigo))">
+                    <td onclick="mostrarTarefa(@Html.DisplayFor(modelItem => item.codigo))">
                         <button type="button" class="btn btn-primary btn-lg btn-block">Tarefa:   @Html.DisplayFor(modelItem => item.Nome)</button>
                         <div class="container ">
                             <span id="@Html.DisplayFor(modelItem => item.codigo)" style="display:none">
@@ -28,7 +28,7 @@
                         </div>
 
                     </td>
-                    
+
                     <th scope="row"> @Html.DisplayFor(modelItem => item.Data.Day)/@Html.DisplayFor(modelItem => item.Data.Month)/@Html.DisplayFor(modelItem => item.Data.Year)</th>
 
                 </tr>
@@ -40,23 +40,37 @@
     </table>
 
     <script>
-    function deleteAluno(id) {
+        function mostrarTarefa(id) {
 
-        var elToggled = document.getElementById(id);
+            var elToggled = document.getElementById(id);
 
-        if (elToggled.style.display == "none") {
+            if (elToggled.style.display == "none") {
 
-            elToggled.style.display = "block";
-        }
-        else {
-            elToggled.style.display = "none";
-        }
+                elToggled.style.display = "block";
+            }
+            else {
+                elToggled.style.display = "none";
+            }
 
 
 
         }
     </script>
 
+    <script>
+        function deletarAluno(id) {
+
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:54828/Home/Delete",
+                data: JSON.stringify({ Id: id }),
+                contentType: "application/json"
+
+
+            });
+        }
+    </script>
+    
 </div>
 
 
