@@ -1,0 +1,77 @@
+﻿@model IEnumerable<GerenciamentoPIM.Models.Tarefas>
+
+
+
+<h2 class="text-center">Gerenciador de Tarefas UNIPIM</h2>
+
+<div class="container center-block">
+    <h3 class="h3">Tarefas para editar ou excluir: </h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Tarefas</th>
+
+                <th scope="col">Data de Entrega</th>
+
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tbody>
+                <tr>
+                    <td onclick="deletarTarefa(@Html.DisplayFor(modelItem => item.codigo))">
+                        <p scope="row">Tarefa:   @Html.DisplayFor(modelItem => item.Nome)</p>
+                        <div class="container ">
+                            <span id="@Html.DisplayFor(modelItem => item.codigo)" style="display:none">
+                                <p class="container" style="padding: 10px; background-color:   #FFFACD;">@Html.DisplayFor(modelItem => item.Tarefa)</p>
+                            </span>
+                        </div>
+
+                    </td>
+
+                    <th scope="row"> @Html.DisplayFor(modelItem => item.Data.Day)/@Html.DisplayFor(modelItem => item.Data.Month)/@Html.DisplayFor(modelItem => item.Data.Year)</th>
+
+                </tr>
+
+            </tbody>
+
+
+        }
+    </table>
+
+    <script>
+        function mostrarTarefa(id) {
+
+            var elToggled = document.getElementById(id);
+
+            if (elToggled.style.display == "none") {
+
+                elToggled.style.display = "block";
+            }
+            else {
+                elToggled.style.display = "none";
+            }
+
+
+
+        }
+    </script>
+
+    <script>
+        function deletarTarefa(id) {
+
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:54828/Home/Delete",
+                data: JSON.stringify({ Id: id }),
+                contentType: "application/json"
+
+
+            });
+
+            
+        }
+    </script>
+
+</div>
+
