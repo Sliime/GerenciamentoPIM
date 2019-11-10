@@ -2,7 +2,7 @@
 
 
 
-<h2 class="text-center">Gerenciador de Tarefas UNIPIM</h2>
+<h2 class="text-center" onload="horarioDiferenca();">Gerenciador de Tarefas UNIPIM</h2>
 
 <div class="container center-block">
     <h3 class="h3">Tarefas que você possui no momento: </h3>
@@ -17,28 +17,28 @@
         </thead>
         @foreach (var item in Model)
         {
-            <tbody>
-                <tr>
-                    <td onclick="mostrarTarefa(@Html.DisplayFor(modelItem => item.codigo))">
-                        <button type="button" class="btn btn-primary btn-lg btn-block">Tarefa:   @Html.DisplayFor(modelItem => item.Nome)</button>
-                        <div class="container ">
-                            <span id="@Html.DisplayFor(modelItem => item.codigo)" style="display:none">
-                                <p class="container" style="padding: 10px; background-color:   #FFFACD;">@Html.DisplayFor(modelItem => item.Tarefa)</p>
-                            </span>
-                        </div>
+    <tbody>
+        <tr>
+            <td onclick="mostrarTarefa(@Html.DisplayFor(modelItem => item.codigo))">
+                <button type="button" class="btn btn-primary btn-lg btn-block">Tarefa:   @Html.DisplayFor(modelItem => item.Nome)</button>
+                <div class="container col-lg-12">
+                    <span id="@Html.DisplayFor(modelItem => item.codigo)" style="display:none">
+                        <p class="container" style="padding: 10px; background-color:   #FFFACD;">@Html.DisplayFor(modelItem => item.Tarefa)</p>
+                    </span>
+                </div>
 
-                    </td>
+            </td>
 
-                    <th scope="row"> @Html.DisplayFor(modelItem => item.Data.Day)/@Html.DisplayFor(modelItem => item.Data.Month)/@Html.DisplayFor(modelItem => item.Data.Year)</th>
+            <th scope="row" id="dataLimite" onclick="mostrarVencidas(@Html.DisplayFor(modelItem => item.Data.Day), @Html.DisplayFor(modelItem => item.Data.Month),@Html.DisplayFor(modelItem => item.Data.Year))"> @Html.DisplayFor(modelItem => item.Data.Day)/@Html.DisplayFor(modelItem => item.Data.Month)/@Html.DisplayFor(modelItem => item.Data.Year)</th>
 
-                </tr>
-
-            </tbody>
+        </tr>
+        
+    </tbody>
 
 
         }
     </table>
-
+    
     <script>
         function mostrarTarefa(id) {
 
@@ -58,19 +58,17 @@
     </script>
 
     <script>
-        function deletarAluno(id) {
+        function mostrarVencidas(dia, mes, ano) {
+            console.log("teste");
+           
+            
 
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:54828/Home/Delete",
-                data: JSON.stringify({ Id: id }),
-                contentType: "application/json"
-
-
-            });
+            console.log(dia, mes, ano);
+            
         }
+ 
     </script>
-    
+
 </div>
 
 

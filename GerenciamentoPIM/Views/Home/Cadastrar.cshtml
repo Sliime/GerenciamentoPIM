@@ -10,16 +10,16 @@
     @Html.AntiForgeryToken()
     
 <form>
-    <div class="form-group">
+    <div class="form-group" id="form">
         <label for="exampleInputEmail1">Nome da Tarefa</label>
         <input type="email" class="form-control" id="Nome" aria-describedby="emailHelp" placeholder="Nome da tarefa">
 
     </div>
-    <div class="form-group">
+    <div class="form-group" id="form">
         <label for="exampleInputPassword1">Descrição da Tarefa</label>
         <textarea type="text" class="form-control" id="Tarefa" placeholder="Descrição"> </textarea>
     </div>
-    <div class="form-group">
+    <div class="form-group" id="form">
         <label for="datalimite">Data limite para entrega</label>
         <input type="date" class="form-control" id="Data" />
     </div>
@@ -42,7 +42,15 @@
             type: "POST",
             url: "http://localhost:54828/Home/Create",
             data: JSON.stringify({ Nome: Nome, Tarefa: Tarefa, Data: Data }),
-            contentType: "application/json"
+            contentType: "application/json",
+            success: function(data) {
+                console.log("cadastrado com sucesso"),
+                    $("#Nome").val(""),
+                    $("#Tarefa").val(""),
+                    $("#Data").val("");//limpa todos inputs do formulário
+                    alert("Tarefa Cadastrada!");
+                
+                }
             
 
         });

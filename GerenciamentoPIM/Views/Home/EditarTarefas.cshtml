@@ -4,30 +4,28 @@
 
 <h2 class="text-center">Gerenciador de Tarefas UNIPIM</h2>
 
-<div class="container center-block">
+<div class="container">
     <h3 class="h3">Tarefas para editar ou excluir: </h3>
     <table class="table">
         <thead>
             <tr>
+                <th scope="col">Editar ou deletar</th>
                 <th scope="col">Tarefas</th>
-
                 <th scope="col">Data de Entrega</th>
-
             </tr>
         </thead>
         @foreach (var item in Model)
         {
             <tbody>
-                <tr>
-                    <td onclick="deletarTarefa(@Html.DisplayFor(modelItem => item.codigo))">
-                        <p scope="row">Tarefa:   @Html.DisplayFor(modelItem => item.Nome)</p>
-                        <div class="container ">
-                            <span id="@Html.DisplayFor(modelItem => item.codigo)" style="display:none">
-                                <p class="container" style="padding: 10px; background-color:   #FFFACD;">@Html.DisplayFor(modelItem => item.Tarefa)</p>
-                            </span>
-                        </div>
-
-                    </td>
+                <tr id="@Html.DisplayFor(modelItem => item.codigo)">
+                    <th scope="row"><button onclick="deletarTarefa(@Html.DisplayFor(modelItem => item.codigo))" >Deletar</button> <button>Editar</button></th>
+                    <td onclick="mostrarTarefa(@Html.DisplayFor(modelItem => item.codigo))">
+                        <button type="button" class="btn btn-primary btn-lg btn-block">
+                            @Html.DisplayFor(modelItem => item.Nome)</button>
+                                                <p id="@Html.DisplayFor(modelItem => item.codigo)" style="display:none">
+                                                    <span style=" background-color:#FFFACD;">@Html.DisplayFor(modelItem => item.Tarefa)</span>
+                                                </p>
+                     </td>
 
                     <th scope="row"> @Html.DisplayFor(modelItem => item.Data.Day)/@Html.DisplayFor(modelItem => item.Data.Month)/@Html.DisplayFor(modelItem => item.Data.Year)</th>
 
@@ -59,19 +57,22 @@
 
     <script>
         function deletarTarefa(id) {
-
+            var IDs = $("#" + id);
+            console.log(IDs);
+            IDs.hide();
             $.ajax({
                 type: "POST",
                 url: "http://localhost:54828/Home/Delete",
                 data: JSON.stringify({ Id: id }),
                 contentType: "application/json"
-
+               
 
             });
 
             
         }
     </script>
+
 
 </div>
 
