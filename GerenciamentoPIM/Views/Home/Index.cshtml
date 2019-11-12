@@ -13,23 +13,50 @@
 
                 <th scope="col">Data de Entrega</th>
 
+                <th scope="col">Dias restantes </th>
+
             </tr>
         </thead>
         @foreach (var item in Model)
         {
     <tbody>
         <tr>
-            <td onclick="mostrarTarefa(@Html.DisplayFor(modelItem => item.codigo))">
-                <button type="button" class="btn btn-primary btn-lg btn-block">Tarefa:   @Html.DisplayFor(modelItem => item.Nome)</button>
-                <div class="container col-lg-12">
-                    <span id="@Html.DisplayFor(modelItem => item.codigo)" style="display:none">
-                        <p class="container" style="padding: 10px; background-color:   #FFFACD;">@Html.DisplayFor(modelItem => item.Tarefa)</p>
-                    </span>
-                </div>
+            @{
+                var dataInicial = DateTime.Now.ToString("dd/MM/yyyy");
+                var dataEntrega = item.Data.ToString("dd/MM/yyyy");
+                TimeSpan tempoRestante = Convert.ToDateTime(dataEntrega) - Convert.ToDateTime(dataInicial);
 
-            </td>
 
-            <th scope="row" id="dataLimite" onclick="mostrarVencidas(@Html.DisplayFor(modelItem => item.Data.Day), @Html.DisplayFor(modelItem => item.Data.Month),@Html.DisplayFor(modelItem => item.Data.Year))"> @Html.DisplayFor(modelItem => item.Data.Day)/@Html.DisplayFor(modelItem => item.Data.Month)/@Html.DisplayFor(modelItem => item.Data.Year)</th>
+
+                <td onclick="mostrarTarefa(@Html.DisplayFor(modelItem => item.codigo))">
+                    <button type="button" class="btn btn-primary btn-lg btn-block">Tarefa:   @Html.DisplayFor(modelItem => item.Nome)</button>
+                    <div>
+                        <span id="@Html.DisplayFor(modelItem => item.codigo)" style="display:none">
+                            <p style="padding: 10px; background-color:   #FFFACD;">@Html.DisplayFor(modelItem => item.Tarefa)</p>
+                        </span>
+                    </div>
+                </td>
+                <th scope="row" id="dataLimite"> @dataEntrega</th>
+                if (@tempoRestante.Days < 3 && @tempoRestante.Days != 0 && @tempoRestante.Days > 0)
+                {
+                    <th scope="row">@tempoRestante.Days Dias SUA TAREFA ESTÁ PARA VENCER!!</th>
+                }
+                else if (tempoRestante.Days == 0)
+                {
+                    <th scope="row">A entrega é HOJE!</th>
+                }
+                else if (tempoRestante.Days < 0)
+                {
+                    <th scope="row">Sua tarefa já venceu!</th>
+                }
+                else
+                {
+                    <th scope="row">@tempoRestante.Days Dias</th>
+                }
+
+
+            }
+
 
         </tr>
         

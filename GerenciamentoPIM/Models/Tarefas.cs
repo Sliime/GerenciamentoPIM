@@ -16,7 +16,7 @@ namespace GerenciamentoPIM.Models
         public string Tarefa { get; set; }
         public DateTime Data { get; set; }
 
-        //
+        // "UPDATE PIM_TABELA SET aluno = ?, Tarefa = ?, Data_Entrega = ? WHERE Código = ?"
 
         public bool Cadastrar(Tarefas aluno)
         {
@@ -168,5 +168,68 @@ namespace GerenciamentoPIM.Models
 
         }
 
+        public void Editar(Tarefas aluno)
+        {
+            try
+            {
+                string conexaoAccess = ConfigurationManager.ConnectionStrings["conexaoAccess"].ToString();
+
+                OleDbConnection conexaoDb = new OleDbConnection(conexaoAccess);
+
+                conexaoDb.Open();
+
+                string query = "UPDATE PIM_TABELA SET aluno = ?, Tarefa = ?, Data_Entrega = ? WHERE Código = ?";
+
+                OleDbCommand cmd = new OleDbCommand(query, conexaoDb);
+
+
+
+                var parametroNome = cmd.CreateParameter();
+                parametroNome.ParameterName = "@Nome";
+                parametroNome.DbType = DbType.String;
+                parametroNome.Value = aluno.Nome;
+                cmd.Parameters.Add(parametroNome);
+
+                var parametroTarefa = cmd.CreateParameter();
+                parametroTarefa.ParameterName = "@Tarefa";
+                parametroTarefa.DbType = DbType.String;
+                parametroTarefa.Value = aluno.Tarefa;
+                cmd.Parameters.Add(parametroTarefa);
+
+                var parametroData = cmd.CreateParameter();
+                parametroData.ParameterName = "@Data";
+                parametroData.DbType = DbType.String;
+                parametroData.Value = aluno.Data;
+                cmd.Parameters.Add(parametroData);
+
+                var pmtId = cmd.CreateParameter();
+                pmtId.ParameterName = "@Id";
+                pmtId.DbType = DbType.Int32;
+                pmtId.Value = aluno.codigo;
+                cmd.Parameters.Add(pmtId);
+
+
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+
+                    conexaoDb.Close();
+                    
+                }
+
+                else
+                {
+                    conexaoDb.Close();
+                    
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+             
+
+            }
+        }
     }
 }

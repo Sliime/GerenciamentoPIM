@@ -50,6 +50,18 @@ namespace GerenciamentoPIM.Controllers
             return View();
         }
 
+        public ActionResult Edit(Tarefas task)
+        {
+            if (ModelState.IsValid)
+            {
+                imus.Editar(task);
+
+                return RedirectToAction("Index");
+            }
+            return View();
+
+        }
+
 
     }
 }
