@@ -17,15 +17,45 @@
         @foreach (var item in Model)
         {
             <tbody>
-                <tr id="@Html.DisplayFor(modelItem => item.codigo)">
-                    <th scope="row"><button onclick="deletarTarefa(@Html.DisplayFor(modelItem => item.codigo))" >Deletar</button> <button>Editar</button></th>
-                    <td onclick="mostrarTarefa(@Html.DisplayFor(modelItem => item.codigo))">
-                        <button type="button" class="btn btn-primary btn-lg btn-block">
-                            @Html.DisplayFor(modelItem => item.Nome)</button>
-                                                <p id="@Html.DisplayFor(modelItem => item.codigo)" style="display:none">
-                                                    <span style=" background-color:#FFFACD;">@Html.DisplayFor(modelItem => item.Tarefa)</span>
-                                                </p>
-                     </td>
+                <tr id="@Html.DisplayFor(modelItem => item.codigo)tr">
+                    <th scope="row">
+                        <button onclick="deletarTarefa(@Html.DisplayFor(modelItem => item.codigo))">Deletar</button>
+                        <button onclick="mostrarFormulario(@Html.DisplayFor(modelItem => item.codigo))">Editar</button>
+                        <span id="@Html.DisplayFor(modelItem => item.codigo)span" style="display:none">
+
+                            <form>
+                                <div class="form-group" id="form">
+                                    <label for="exampleInputEmail1">Nome da Tarefa</label>
+                                    <input type="email" class="form-control" id="Nome" aria-describedby="emailHelp" placeholder="Nome da tarefa" value=@item.Nome>
+
+                                </div>
+                                <div class="form-group" id="form">
+                                    <label for="exampleInputPassword1">Descrição da Tarefa</label>
+                                    <textarea type="text" class="form-control" id="Tarefa" placeholder="Descrição">@item.Tarefa </textarea>
+                                </div>
+                                <div class="form-group" id="form">
+                                    <label for="datalimite">Data limite para entrega</label>
+                                    <input type="date" class="form-control" id="Data" value="@item.Data.Year-@item.Data.Month.ToString("d2")-@item.Data.Day"/>
+                                </div>
+                                <a href="#" onclick="SalvarAluno(@Html.DisplayFor(modelItem => item.codigo));" class="btn btn-default">Editar Tarefa</a>
+                            </form>
+
+                        </span>
+                    </th>
+
+
+
+
+
+
+                    <td>
+                        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="mostrarTarefa(@Html.DisplayFor(modelItem => item.codigo))">
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </button>
+                        <p id="@Html.DisplayFor(modelItem => item.codigo)" style="display:none">
+                            <span style=" background-color:#FFFACD;">@Html.DisplayFor(modelItem => item.Tarefa)</span>
+                        </p>
+                    </td>
 
                     <th scope="row"> @Html.DisplayFor(modelItem => item.Data.Day)/@Html.DisplayFor(modelItem => item.Data.Month)/@Html.DisplayFor(modelItem => item.Data.Year)</th>
 
@@ -57,7 +87,7 @@
 
     <script>
         function deletarTarefa(id) {
-            var IDs = $("#" + id);
+            var IDs = $("#" + id + "tr");
             console.log(IDs);
             IDs.hide();
             $.ajax({
@@ -65,14 +95,54 @@
                 url: "http://localhost:54828/Home/Delete",
                 data: JSON.stringify({ Id: id }),
                 contentType: "application/json"
-               
+
 
             });
 
-            
+
+        }
+    </script>
+    <script>
+        function mostrarFormulario(id) {
+            var elToggled = document.getElementById(id + "span");
+
+            if (elToggled.style.display == "none") {
+
+                elToggled.style.display = "block";
+            }
+            else {
+                elToggled.style.display = "none";
+            }
+
         }
     </script>
 
+    <script>
+        function SalvarAluno(id) {
+            var Nome = $("#Nome").val();
+            var Tarefa = $("#Tarefa").val();
+            var Data = $("#Data").val();
 
+
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:54828/Home/Edit",
+                data: JSON.stringify({ codigo: id, Nome: Nome, Tarefa: Tarefa, Data: Data }),
+                contentType: "application/json",
+                success: function (data) {
+                    console.log("cadastrado com sucesso"),
+                        $("#Nome").val(""),
+                        $("#Tarefa").val(""),
+                        $("#Data").val("");//limpa todos inputs do formulário
+                    alert("Tarefa Editada!");
+
+                }
+
+
+            });
+
+
+        }
+    </script>
 </div>
 
